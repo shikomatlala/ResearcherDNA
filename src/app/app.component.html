@@ -1,0 +1,10 @@
+<div (load)="checkIsToBeShown()">
+    <app-homenavbar *ngIf="showElement"></app-homenavbar>
+    <main>
+        <div style="display: flex; flex-grow: grow">
+            <app-sidenav *ngIf="showElement"></app-sidenav>
+            <router-outlet></router-outlet>
+          </div>
+    </main>
+    
+</div>
