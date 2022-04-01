@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { SidenavService } from './services/navs/sidenav.service';
-
+import { ProjectObjectService } from './home/login/dashboard/projects/project-object.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -54,7 +54,11 @@ import { DatePipe } from '@angular/common';
     FontAwesomeModule,
     HttpClientModule
   ],
-  providers: [SidenavService, GlobalVariables, ApiserviceService, DatePipe],
+  providers: [SidenavService, 
+    GlobalVariables, 
+    ApiserviceService,
+    ProjectObjectService,
+    DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

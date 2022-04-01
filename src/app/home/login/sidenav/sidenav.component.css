@@ -82,6 +82,20 @@
   }
   
   
-  
-  
-  
+  .centerText
+  {
+    text-align: center;
+  }
+  .hoverTile
+  {
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
+    transition: 0.7s;
+  }
+  .hoverTile:hover
+  {
+    border-color: rgb(0, 132, 255);
+  }
+

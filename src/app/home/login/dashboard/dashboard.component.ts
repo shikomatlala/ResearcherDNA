@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ApiserviceService } from 'src/app/apiservice.service';
 import { GlobalVariables} from './../../../globals';
 import { DatePipe } from '@angular/common';
+import { ProjectObjectService } from './projects/project-object.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -13,18 +14,27 @@ import { DatePipe } from '@angular/common';
 
 export class DashboardComponent implements OnInit {
 
-  displaySuccessMessage = "display: none; width:80%; margin-left: auto; margin-right: auto; ";
+  constructor(public projectObject : ProjectObjectService, public datepipe: DatePipe, public router:Router, public globalVariables: GlobalVariables, private service: ApiserviceService ) { }
+  
+
   isDisplaySuccessMessage = false;
+  isDisplayErrorInputMessage = false;
+
+  closeErrorInputMessage()
+  {
+    if(this.isDisplayErrorInputMessage)
+      this.isDisplayErrorInputMessage = false;
+    else
+      this.isDisplayErrorInputMessage = true;
+  }
   closeDisplaySuccessMessage()
   {
     if(this.isDisplaySuccessMessage)
     {
-      this.displaySuccessMessage = "display: none; width:80%; margin-left: auto; margin-right: auto;";
       this.isDisplaySuccessMessage = false;
     }
     else
     {
-      this.displaySuccessMessage = "display: unset; ";
       this.isDisplaySuccessMessage = true;
     }
   }
@@ -36,7 +46,9 @@ export class DashboardComponent implements OnInit {
   i!: number;
   projectData: any;
   //Now the goal is to make sure that I create an object
-  constructor(public datepipe: DatePipe, public router:Router, public globalVariables: GlobalVariables, private service: ApiserviceService ) { }
+  
+  
+  
   first2Projects: any;
   newProjectObject = {projectTypeId: 1, userId: 2, description: "", descipline: "", researchType: "", name: ""};
   // inputDescription + inputDescipline + inputResearchP + inputResearch + inputTitle
@@ -117,9 +129,16 @@ export class DashboardComponent implements OnInit {
     else
     {
       console.log("Fill in all the fields");
+      this.closeErrorInputMessage();
     }
   }
-
+  updateProjectObject(projectId:any)
+  {
+      // this.projectObject.updateProjectObject(projectId);
+      this.service.getProject(projectId).subscribe((res)=>{
+        this.projectObject.setProjectObject(res.project);
+      });
+  }
   createNewProject(data:any)
   {
     this.service.createNewProject(data).subscribe((res)=>{
