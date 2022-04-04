@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
+import { Router } from '@angular/router';
 //I need to work with services
 import { SidenavService } from 'src/app/services/navs/sidenav.service';
 
@@ -13,8 +14,9 @@ import { SidenavService } from 'src/app/services/navs/sidenav.service';
 
 
 export class SidenavComponent implements OnInit {
+  test : string = 'background-color:rgb(0, 132, 255); color:white;';
 
-  constructor(public sideNavService: SidenavService) { 
+  constructor(public sideNavService: SidenavService, private router: Router) { 
     
   }
   @ViewChild('profileElement') profileElement: any;
@@ -23,11 +25,15 @@ export class SidenavComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.test
+
+    this.router.navigate(['/dashboard'])
     this.activateProjectElement();
     this.changeSideNav();
     this.navProperties = SidenavService.navProperties;
   }
-  
+  defaultClass ="background-color: rgb(0, 132, 255);  color: white;";
   navProperties =  SidenavService.navProperties;
   changeSideNav()
   {

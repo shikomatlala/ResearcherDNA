@@ -1,5 +1,5 @@
-
-<div class="d-flex flex-column flex-shrink-0 p-3 " [style.height]="navProperties.height" style="padding-right: 10px; margin-left: 10px; background-color: #ffffff;border-right: rgb(226, 226, 226);border-right-width: 1px ; border-right-style: solid;">
+<!-- border-right: rgb(226, 226, 226);border-right-width: 1px ; border-right-style: solid; -->
+<div class="d-flex flex-column flex-shrink-0 p-3 " [style.height]="navProperties.height" style="padding-right: 10px; margin-left: 10px; background-color: #ffffff;">
     <div style="float:right; cursor: pointer;" (click)="changeSideNav()">
         <img src="../../../../assets/media/logos/{{navProperties.sidenavIcon}}" alt="Close Side Nav" width="16px" height="16px">
     </div>
@@ -10,13 +10,13 @@
                 <div class="avatar-preview"><div id="imagePreview" style="background-image: url('https://avatars.githubusercontent.com/u/58688272?v=4');"></div></div>
             </div>
         </div>
-        <hr>
+        <!-- <hr> -->
         <ul class="nav nav-pills flex-column mb-auto" id="myDetails">
             <li ><a #profileElement id="1" ng-repeat="prop in propertyDetails"  routerLink="/profile" class="nav-link link-dark hoverTile ng-click-active centerText"  (click)="activateProfileElement()">Profile</a></li>&nbsp;
-            <li ><a #projectElement id="2" routerLink="/dashboard" class="nav-link link-dark hoverTile ng-click-active centerText" (click)="activateProjectElement()">My Projects</a></li>&nbsp;
+            <li ><a #projectElement id="2" routerLink="/dashboard" [style]="test" class="nav-link link-dark hoverTile ng-click-active centerText" (click)="activateProjectElement()">My Projects</a></li>&nbsp;
             <li ><a #chatBoxElement id="3" routerLink="/chatbox" class="nav-link link-dark hoverTile ng-click-active centerText" (click)="activateChatboxElement()">Chatbox</a></li>&nbsp;
         </ul>
-        <hr>
+        <!-- <hr> -->
     </div>
 </div>
 <!-- <router-outlet></router-outlet> -->

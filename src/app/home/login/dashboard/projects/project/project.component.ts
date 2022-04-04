@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { ApiserviceService } from 'src/app/apiservice.service';
 import { ProjectObjectService } from '../project-object.service';
+import { SidenavService } from 'src/app/services/navs/sidenav.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { ProjectObjectService } from '../project-object.service';
 export class ProjectComponent implements OnInit {
 
   // public projectObject: ProjectObject,
-  constructor( public globalProjectObject : ProjectObjectService, public datepipe: DatePipe, public router: Router, private service: ApiserviceService) { }
+  constructor(public sidenavService: SidenavService, public globalProjectObject : ProjectObjectService, public datepipe: DatePipe, public router: Router, private service: ApiserviceService) { }
 
   @ViewChild('noteText') noteText:any;
   @ViewChild('noteTitle') noteTitle:any;
@@ -155,6 +156,12 @@ export class ProjectComponent implements OnInit {
       console.log(res.guidelines);
       this.guideLinesObject = res.guidelines;
     });
+  }
+  openInNotes(noteId:number)
+  {
+    this.globalProjectObject.updateNoteObject(noteId);
+    this.sidenavService.makeLinkActive(2);
+
   }
 
 }
