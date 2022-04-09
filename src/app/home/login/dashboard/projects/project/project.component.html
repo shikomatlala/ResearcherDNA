@@ -1,8 +1,6 @@
-<main>
-  &nbsp;&nbsp;
-    <div style="width: 97%;">
+<main style="background-color:rgb(255, 255, 255); height: 93%; position: fixed; top: 120px; width:83%">
+  <div>
       <app-topnav></app-topnav>
-      <div style="overflow: auto; height: 100%;">
         <app-innernav></app-innernav>
         <!-- GRID SYSTEM -->
         <div class="row">
@@ -29,7 +27,6 @@
                       </div>
                     </li>
                   </ul>
-
                 </div>
               </div>
               &nbsp;&nbsp;&nbsp;
@@ -76,12 +73,9 @@
                       <strong>{{createNoteResponse}}:</strong> Note Saved &nbsp;
                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeSuccessNoteMessage()"></button>
                     </div>
-                    
-                    <h6 class="card-subtitle mb-2 text-muted">Create Title</h6>
                     <input #noteTitle type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter Title" style="border:none;  background-color: rgb(245, 245, 245); outline:none">
                   </div>
                   <div class="mb-3">
-                    <h6 class="card-subtitle mb-2 text-muted">Take Note </h6>
                     <textarea #noteText class="form-control" id="exampleFormControlTextarea1" style=" resize: none;" rows="13"></textarea>
                   </div>
                   <button type="button" (click)="createNewNote()" class="btn btn-primary btn-xs">Save</button>&nbsp;
@@ -89,8 +83,6 @@
                   <hr >
                   <!-- MY NOTES DIV - MAKE THIS DIV SCROLLABLE -->
                   <div style="overflow:scroll; height:auto; width: 100%; background-color: rgb(255, 255, 255);">
-                    <h6 class="card-subtitle mb-2 text-muted">Notes</h6>
-                    <hr style="margin: 0px">
                     <div class="row">
                       <div class="card" style="border: none; ">
                         <div class="card-body" style="border:none; padding: none; ">
@@ -98,10 +90,8 @@
                             <div>
                               <div class="card border-light mb-3" style="width: 100%; border: none;">
                                 <div class="card-header" style="width:100%; background-color:#ffffff; color:rgb(27, 27, 27);">Notes
-                                  &nbsp;&nbsp;
                                 </div>
                                 <div class="card border-light mb-3" style="width: 100%;margin-left: auto; margin-right: auto; border: none;">
-                                  &nbsp;&nbsp;
                                   <div style="overflow: scroll; height: 300px; width: 100%; margin-left: auto; margin-right: auto;">
                                     <ul class="list-group" style="width: 90%; margin-left: auto; margin-right: auto;">
                                       <li class="list-group-item" *ngFor = 'let us of notesData'>
@@ -115,14 +105,10 @@
                                         </div>
                                       </li>
                                     </ul>
-                
                                   </div>
                                 </div>
-                                &nbsp;&nbsp;&nbsp;
                               </div>
                             </div>
-                            <!-- <div class="col-sm-9"><h4 class="card-subtitle mb-1">Kat is going home...</h4></div>
-                            <div class="col-sm-2"><h6 class="card-subtitle mb-1"><button routerLink="/notes" type="button" class="btn btn-success btn-sm">Edit</button></h6></div> -->
                           </div>
                         </div>
                       </div>
@@ -133,12 +119,5 @@
             </div>
           </div>
         </div>
-        <!-- END GRID -->
-        &nbsp;
-        &nbsp;
-          &nbsp;
-          </div>
-          &nbsp;
-        </div>
-    </main>
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+  </div>
+</main>

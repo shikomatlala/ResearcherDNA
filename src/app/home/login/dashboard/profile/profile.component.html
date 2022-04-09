@@ -1,6 +1,6 @@
-<main style="background-color: rgb(255, 255, 255);">
+<main style="background-color:rgb(255, 255, 255); height: 93%; position: fixed; top: 70px; width:82%">
     &nbsp;&nbsp;
-    <div style="background-color: rgb(255, 255, 255);" [style.width]="innerWidth" [style.height]="innerHeight">
+    <div style="background-color: rgb(255, 255, 255); position:relative; top:100px;" [style.width]="innerWidth" [style.height]="innerHeight">
     &nbsp;&nbsp;
     &nbsp;&nbsp;
     &nbsp;&nbsp;
@@ -29,12 +29,14 @@
                                         <h5 class="card-title"><span style="color:lightslategrey;">Title</span></h5>
                                         <select #inputDescipline class="form-control form-control-sm">
                                             <option>Mr</option>
-                                            <option>Mrs</option>
-                                            <option>Miss</option>
-                                            <option>Prof</option>
-                                            <option>Dr</option>
+                                            <option>Mis</option>
                                         </select>
                                         <br>
+                                    </div>
+                                    <div class="col">
+                                        <!-- <h5 class="card-title"><span style="color:lightslategrey;">Password</span></h5>
+                                        <input class="form-control form-control-sm" type="password" value="">
+                                        <br> -->
                                     </div>
                                     <div class="col">
                                         <h5 class="card-title"><span style="color:lightslategrey;">First Name</span></h5>
@@ -57,20 +59,16 @@
                                         <br>
                                     </div>
                                     
+
                                     <div class="col">
                                         <h5 class="card-title"><span style="color:lightslategrey;">Password</span></h5>
-                                        <input #inputPassword class="form-control form-control-sm" type="password" value="">
-                                        <br>
-                                    </div>
-                                    <div class="col">
-                                        <h5 class="card-title"><span style="color:lightslategrey;">Confirm Password</span></h5>
-                                        <input #inputConfirmPasswordForIssues2PowerToAnnoyKat class="form-control form-control-sm" type="password" value="" >
+                                        <input #inputPassword  class="form-control form-control-sm" type="password" value="" >
                                         <br>
                                     </div>
                                     <br>
                                     <div class="col">
-                                        <h5 class="card-title"><span style="color:lightslategrey;">Title</span></h5>
-                                        <input #inputTitle class="form-control form-control-sm" type="text" value="">
+                                        <h5 class="card-title"><span style="color:lightslategrey;">Confirm Password</span></h5>
+                                        <input #inputConfirmPasswordForIssues2PowerToAnnoyKat class="form-control form-control-sm" type="text" value="">
                                         <br>
                                     </div>
                                 </div>

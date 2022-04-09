@@ -27,11 +27,10 @@ export class SidenavComponent implements OnInit {
   ngOnInit(): void {
 
     this.test
-
     this.router.navigate(['/dashboard'])
-    this.activateProjectElement();
-    this.changeSideNav();
-    this.navProperties = SidenavService.navProperties;
+    // this.activateProjectElement();
+    // this.changeSideNav();
+    // this.navProperties = SidenavService.navProperties;
   }
   defaultClass ="background-color: rgb(0, 132, 255);  color: white;";
   navProperties =  SidenavService.navProperties;

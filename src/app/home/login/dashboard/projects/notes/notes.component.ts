@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { SidenavService } from 'src/app/services/navs/sidenav.service';
+import { DatePipe } from '@angular/common';
 import {ApiserviceService} from './../../../../../apiservice.service';
 import { ProjectObjectService } from '../project-object.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DOCUMENT } from '@angular/common';
+
 
 @Component({
   selector: 'app-notes',
@@ -11,18 +12,26 @@ import { DOCUMENT } from '@angular/common';
 })
 export class NotesComponent implements OnInit {
 
-  constructor(public globalProjectObject: ProjectObjectService, private service: ApiserviceService) { }
+  constructor(public sidenavService: SidenavService,public globalProjectObject: ProjectObjectService, private service: ApiserviceService, public datepipe: DatePipe) { }
   //Variables to use to update the note.
   @ViewChild('inputNoteTitle') inputNoteTitle: any;
   @ViewChild('inputNoteText') inputNoteText:any;
-  //Notes Data
-  // newNoteObject: any;
+  @ViewChild('noteDate') noteDate:any;
+  @ViewChild('inputSearchNotes') inputSearchNotes:any;
+  public innerWidth: any;
+  public innerHeight: any;
+  showClear = false;
   notesData: any;
+  date = new Date();
+  testVariable = "shikomatlala@gmail.com";
   noteObject = ProjectObjectService.noteObject;
   ngOnInit(): void {
     this.service.notes().subscribe((res)=>{
       console.log(res.notes, "res==>");
       this.notesData = res.notes;
+      this.innerWidth = (window.innerWidth * 0.823) + "px";
+      this.innerHeight= (window.innerHeight * 0.78) + "px";
+
     })
     if(ProjectObjectService.projectOpened)
     {
@@ -32,16 +41,42 @@ export class NotesComponent implements OnInit {
       console.log("We are here");
     }
   }
+  clearInputSearch()
+  {
+    this.inputSearchNotes.nativeElement.value = "";
+    this.showClear = false;
+  }
+  updateClearButton()
+  {
+    if(this.inputSearchNotes.nativeElement.value !="")
+    {
+      this.showClear = true;
+    }
+    else
+    {
+      this.showClear = false;
+    }
+  }
   updateNote(id:any)
   {
     //Check if the note is not empty
 
   }
 
+  formatDate(date:any)
+  {
+
+    return this.datepipe.transform(date, ' dd/MMM/yy');
+  }
+  formatTime(date:any)
+  {
+    return this.datepipe.transform(date, ' h:mm a');
+  }
   clearNote()
   {
     this.inputNoteText.nativeElement.value = "";
     this.inputNoteTitle.nativeElement.value = "";
+    this.noteDate.value = "";
   }
 
   openNote(id : any)
