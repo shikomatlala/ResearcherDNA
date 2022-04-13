@@ -12,7 +12,8 @@ export class ProjectObjectService {
    text: "",
    title: "",
    wordCount: 0,
-   createdAt: ""};
+   createdAt: "",
+   userId: 0};
   static projectObject = {
     id: 0,
     name: "Not Found",

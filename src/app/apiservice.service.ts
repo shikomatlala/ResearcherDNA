@@ -29,6 +29,11 @@ export class ApiserviceService {
       return this._http.get(`${this.apiUrl+"notes/"+ noteId}`);
   }
 
+  deleteNote(noteId:number) : Observable<any>
+  {
+     return this._http.delete(`${this.apiUrl+"notes/"+noteId}`);
+  }
+
   saveNote(noteObject: any):Observable<any>
   { 
     return this._http.post(`${this.apiUrl+"notes"}`, noteObject); 

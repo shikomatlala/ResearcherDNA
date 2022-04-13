@@ -29,11 +29,12 @@
   padding-top: 5px;
 }
 
-::-webkit-scrollbar {width: 4px;}
+::-webkit-scrollbar {width: 4px; height:0px;}
 
 
 ::-webkit-scrollbar-thumb {
   background: rgb(221, 221, 221); 
+  border-radius: 4px;
 } 
 
   .profile_picture_body {

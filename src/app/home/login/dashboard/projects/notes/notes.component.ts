@@ -3,6 +3,7 @@ import { SidenavService } from 'src/app/services/navs/sidenav.service';
 import { DatePipe } from '@angular/common';
 import {ApiserviceService} from './../../../../../apiservice.service';
 import { ProjectObjectService } from '../project-object.service';
+import { ControlContainer } from '@angular/forms';
 
 
 @Component({
@@ -18,10 +19,16 @@ export class NotesComponent implements OnInit {
   @ViewChild('inputNoteText') inputNoteText:any;
   @ViewChild('noteDate') noteDate:any;
   @ViewChild('inputSearchNotes') inputSearchNotes:any;
+  @ViewChild('hiddenNoteIdInut') hiddenNoteIdInput:any;
   public innerWidth: any;
   public innerHeight: any;
+  public notesListHeight: any = "410px";
+  public numNotesListHeight : number = 410;
+  isNotesFound: boolean = true;
+  createNoteResponse: any;
   showClear = false;
   notesData: any;
+  notesByTitle: any;
   date = new Date();
   testVariable = "shikomatlala@gmail.com";
   noteObject = ProjectObjectService.noteObject;
@@ -31,6 +38,10 @@ export class NotesComponent implements OnInit {
       this.notesData = res.notes;
       this.innerWidth = (window.innerWidth * 0.823) + "px";
       this.innerHeight= (window.innerHeight * 0.78) + "px";
+      if(this.notesData.length < 1)
+      {
+        this.isNotesFound = false;
+      }
 
     })
     if(ProjectObjectService.projectOpened)
@@ -40,6 +51,57 @@ export class NotesComponent implements OnInit {
       console.log(this.noteObject);
       console.log("We are here");
     }
+  }
+  findNotesByTitle()
+  {
+    
+    // this.inputSearchNotes.nativeElement.value
+    if(this.inputSearchNotes.nativeElement.value != "")
+    {
+      console.log(this.inputSearchNotes.nativeElement.value);
+      //Now we need to loop through the whole note object.
+      if(this.notesData.length > 0)
+      {
+        
+        let numberOfTrimmed:number = 0;
+        for(let x = 0; x < this.notesData.length; x++)
+        {
+          //Make the whole title lowercase
+          let testTitle =  this.notesData[x].title.toLowerCase;
+          let searchTitle =   this.inputSearchNotes.nativeElement.value;
+          console.log("Test Title " + searchTitle.toLowerCase())
+          if(!(this.notesData[x].title.toLowerCase().search(this.inputSearchNotes.nativeElement.value.toLowerCase()) >= 0))
+          {
+              this.notesData.splice(x, 1);
+              //Count the number of items that we have taken away 
+              //Reduce the height of the div based upon the number of elements that we have removed
+              numberOfTrimmed++;
+          }
+          //Now keep in mind tha the current width can take 9 messages
+          //The current height of 410 can take 8 Notes so the one thing that we can do 
+          //Eat time you type it should search based upon what you
+        }
+        // if(numberOfTrimmed <= 10)
+        // {
+        //   //reduce the height
+        //   this.numNotesListHeight = this.numNotesListHeight - ( numberOfTrimmed * 41);
+        //   this.notesListHeight = this.numNotesListHeight + "px";
+        //   console.log(this.notesListHeight);
+        // }
+      }
+    }
+    else
+    {
+      this.service.notes().subscribe((res)=>{
+        console.log(res.notes, "res==>");
+        this.notesData = res.notes;
+        this.innerWidth = (window.innerWidth * 0.823) + "px";
+        this.innerHeight= (window.innerHeight * 0.78) + "px";
+        this.notesListHeight = "410px"
+  
+      });
+    }
+
   }
   clearInputSearch()
   {
@@ -96,5 +158,39 @@ export class NotesComponent implements OnInit {
     this.noteObject = ProjectObjectService.noteObject;
   }
 
-
+  createNewNote()
+  {
+    //Check if the notes are empty.
+    //Mainly we want to make sure that body of the note is not empty
+    if(this.inputNoteText.nativeElement.value == "")
+    {
+      // this.closeErrorInputMessage();
+    }
+    else
+    {
+      // this.noteObject.projectId = this.projectObject
+      this.noteObject.id = ProjectObjectService.projectObject.id;
+      this.noteObject.text = this.inputNoteText.nativeElement.value;
+      this.noteObject.title = this.inputNoteText.nativeElement.value;
+      this.noteObject.userId = ProjectObjectService.projectObject.userId;
+      // console.log(this.noteObject);
+      this.service.saveNote(this.noteObject).subscribe((res)=>{
+        this.createNoteResponse = res.status;
+      });
+      this.ngOnInit();
+      // this.closeSuccessNoteMessage();
+    
+    }
+  }
+  deleteNote(noteId:number, noteTitle:any)
+  {
+    let confirmText = "You are about to delete:\n " + "\" " + noteTitle   + " \"";
+    if(confirm(confirmText)  == true)
+    {
+      this.service.deleteNote(noteId).subscribe((res)=>{
+        console.log(res.status, "res==>");
+        this.ngOnInit();
+      });
+    }   
+  }
 }

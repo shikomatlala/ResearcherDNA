@@ -1,8 +1,8 @@
-::-webkit-scrollbar {width: 4px;}
+::-webkit-scrollbar {width: 5px; height: 0px;}
 
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(221, 221, 221); 
+  background: rgba(221, 221, 221, 0); 
 } 
 
 
@@ -78,10 +78,10 @@
 
 } */
 
-table{
+/* table{
   position: relative;
   top: -120px;
-}
+} */
 
 .vrd{
   
@@ -149,4 +149,18 @@ table{
 .time-left {
   float: left;
   color: #999;
+}
+
+
+
+.deleteImg
+{
+  display: block; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.deleteImg:hover{
+  animation: shake-animation 4.72s ease infinite;
+  transform-origin: 50% 50%;
 }
