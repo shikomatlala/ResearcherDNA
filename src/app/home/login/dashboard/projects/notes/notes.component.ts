@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SidenavService } from 'src/app/services/navs/sidenav.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe,  } from '@angular/common';
 import {ApiserviceService} from './../../../../../apiservice.service';
 import { ProjectObjectService } from '../project-object.service';
 import { ControlContainer } from '@angular/forms';
@@ -19,12 +19,13 @@ export class NotesComponent implements OnInit {
   @ViewChild('inputNoteText') inputNoteText:any;
   @ViewChild('noteDate') noteDate:any;
   @ViewChild('inputSearchNotes') inputSearchNotes:any;
-  @ViewChild('hiddenNoteIdInut') hiddenNoteIdInput:any;
+  @ViewChild('hiddenNoteIdInput') hiddenNoteIdInput:any;
   public innerWidth: any;
   public innerHeight: any;
   public notesListHeight: any = "410px";
   public numNotesListHeight : number = 410;
   isNotesFound: boolean = true;
+  isThisNoteOpen: boolean = false;
   createNoteResponse: any;
   showClear = false;
   notesData: any;
@@ -32,6 +33,8 @@ export class NotesComponent implements OnInit {
   date = new Date();
   testVariable = "shikomatlala@gmail.com";
   noteObject = ProjectObjectService.noteObject;
+  makeNotepadFillScreen = "col-8";
+  noteTextArea:any;
   ngOnInit(): void {
     this.service.notes().subscribe((res)=>{
       console.log(res.notes, "res==>");
@@ -41,6 +44,7 @@ export class NotesComponent implements OnInit {
       if(this.notesData.length < 1)
       {
         this.isNotesFound = false;
+        this.makeNotepadFillScreen = "";
       }
 
     })
@@ -121,8 +125,17 @@ export class NotesComponent implements OnInit {
   }
   updateNote(id:any)
   {
-    //Check if the note is not empty
-
+    if(this.inputNoteText.nativeElement.value.trim() != "")
+    {
+      //Check if the note is not empty
+      let updatedNote = this.noteObject;
+      updatedNote.title = this.inputNoteTitle.nativeElement.value;
+      updatedNote.text= this.inputNoteText.nativeElement.value;
+      this.service.updateNote(id, updatedNote).subscribe((res)=>{
+        console.log(res.status);
+        this.ngOnInit();
+      });
+    }
   }
 
   formatDate(date:any)
@@ -138,7 +151,8 @@ export class NotesComponent implements OnInit {
   {
     this.inputNoteText.nativeElement.value = "";
     this.inputNoteTitle.nativeElement.value = "";
-    this.noteDate.value = "";
+    this.noteDate.nativeElement.value = "";
+    this.isThisNoteOpen = false;
   }
 
   openNote(id : any)
@@ -146,8 +160,10 @@ export class NotesComponent implements OnInit {
     this.service.getNote(id).subscribe((res)=>{
       console.log(res.note, "res==>");
       this.noteObject = res.note;
-      this.inputNoteTitle.nativeElement.value = res.note.text;
+      ProjectObjectService.noteObject = res.note;
+      this.inputNoteTitle.nativeElement.value = res.note.title;
     })
+    this.isThisNoteOpen = true;
     //Now when we get the a specific note that we are looking for 
     //Get the elment Id
     //Create a note object somewhere.
@@ -158,32 +174,58 @@ export class NotesComponent implements OnInit {
     this.noteObject = ProjectObjectService.noteObject;
   }
 
+  showAllNotes()
+  {
+    this.service.notes().subscribe((res)=>{
+      console.log(res.notes, "res==>");
+      this.notesData = res.notes;
+      this.innerWidth = (window.innerWidth * 0.823) + "px";
+      this.innerHeight= (window.innerHeight * 0.78) + "px";
+      this.notesListHeight = "410px"
+
+    });
+    this.inputSearchNotes.nativeElement.value = "";
+    this.showClear = false;
+    //update the class so that the notepad streches the whole page.
+    this.makeNotepadFillScreen = "";
+
+  }
   createNewNote()
   {
     //Check if the notes are empty.
     //Mainly we want to make sure that body of the note is not empty
-    if(this.inputNoteText.nativeElement.value == "")
+    if(this.inputNoteText.nativeElement.value.trim() == "")
     {
       // this.closeErrorInputMessage();
     }
     else
     {
       // this.noteObject.projectId = this.projectObject
-      this.noteObject.id = ProjectObjectService.projectObject.id;
-      this.noteObject.text = this.inputNoteText.nativeElement.value;
-      this.noteObject.title = this.inputNoteText.nativeElement.value;
-      this.noteObject.userId = ProjectObjectService.projectObject.userId;
+      let newNoteObject = {
+        text: this.inputNoteText.nativeElement.value,
+        title: this.inputNoteTitle.nativeElement.value,
+        userId: ProjectObjectService.projectObject.userId
+      };
+      console.log(newNoteObject);
       // console.log(this.noteObject);
-      this.service.saveNote(this.noteObject).subscribe((res)=>{
+      this.service.saveNote(newNoteObject).subscribe((res)=>{
         this.createNoteResponse = res.status;
+        this.ngOnInit();
+        this.clearNote();
       });
-      this.ngOnInit();
+
       // this.closeSuccessNoteMessage();
+      if(!this.isNotesFound)
+      {
+        this.isNotesFound = true;
+        this.makeNotepadFillScreen = "col-8"
+      }
     
     }
   }
   deleteNote(noteId:number, noteTitle:any)
   {
+    // console.log(this.hiddenNoteIdInput.nativeElement.value);
     let confirmText = "You are about to delete:\n " + "\" " + noteTitle   + " \"";
     if(confirm(confirmText)  == true)
     {
@@ -191,6 +233,12 @@ export class NotesComponent implements OnInit {
         console.log(res.status, "res==>");
         this.ngOnInit();
       });
-    }   
+    }  
+    //Now we also need to make sure that we clear the noteEditor 
+    if( this.hiddenNoteIdInput.nativeElement.value == ProjectObjectService.noteObject.id)
+    {
+      this.clearNote();
+
+    } 
   }
 }

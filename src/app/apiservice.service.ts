@@ -38,6 +38,11 @@ export class ApiserviceService {
   { 
     return this._http.post(`${this.apiUrl+"notes"}`, noteObject); 
   }
+
+  updateNote(noteId:any, noteObject:any): Observable<any>
+  {
+    return this._http.patch(`${this.apiUrl+"notes/"+noteId}`, noteObject);
+  }
   guidelines(projectTypeId:number): Observable<any>
   {
      return this._http.get(`${this.apiUrl+"guidelines"}?projectTypeId=`+projectTypeId);
