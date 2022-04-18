@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { elementAt } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-chatbox',
@@ -9,12 +11,21 @@ import { elementAt } from 'rxjs';
 })
 export class ChatboxComponent implements OnInit {
 
-  constructor(public datepipe: DatePipe) { }
+  constructor(public datepipe: DatePipe, public http: HttpClient) { }
   @ViewChild('inputChatBox') inputChatBox: any;
   @ViewChild('chatBoxPage') chatBoxPage: any;
+  @ViewChild('formPopupInsertAttachment') formPopupInsertAttachment :any;
+  isformPopupInsertAttachmentOpen = false;
+  displayPopup = "none";
+  clickedInsertFileButtonColor = "white";
+  selectedFile!: File;
 
-  // chatGroups = 
-
+  sidenavIcons: Array<string> = ["edit-solid.svg", "menu_black_24dp.svg"];
+  sideNavProperties = {status: false,
+      width: "0px",
+      opacity: "0%",
+      icon: this.sidenavIcons[0]
+    };
 
 
 
@@ -133,4 +144,54 @@ export class ChatboxComponent implements OnInit {
 
   }
 
+
+  changeSideNav()
+  {
+    if(this.sideNavProperties.status == true)
+    {
+      this.sideNavProperties.status = false;
+      this.sideNavProperties.width = "0px";
+      this.sideNavProperties.opacity = "0%";
+      this.sideNavProperties.icon = this.sidenavIcons[1];
+    }
+    else
+    {
+      this.sideNavProperties.status = true;
+      this.sideNavProperties.width = "280px";
+      this.sideNavProperties.opacity = "100%";
+      this.sideNavProperties.icon = this.sidenavIcons[0];    
+    }
+  }
+
+  onFileSelected(event:any)
+  {
+
+    this.selectedFile = <File>event.target.files[0];
+    console.log(this.selectedFile);
+  }
+
+  openFormPopupInsertAttachment()
+  {
+    if(this.isformPopupInsertAttachmentOpen == true)
+    {
+      this.isformPopupInsertAttachmentOpen = false;
+      this.formPopupInsertAttachment.nativeElement.style = "block";
+      this.displayPopup = "block";
+      this.clickedInsertFileButtonColor = "rgb(227, 227, 227)";
+    }
+    else
+    {
+      this.isformPopupInsertAttachmentOpen = true;
+      this.displayPopup = "none";
+      this.clickedInsertFileButtonColor = "white";
+    }
+    
+  }
+
+
+  onFileUpload()
+  {
+    // const fd  = new FormData();
+    // this.http.post('')
+  }
 }

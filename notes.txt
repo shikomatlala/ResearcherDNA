@@ -1,0 +1,5 @@
+=========
+GIT NOTES
+----
+CLONE BRANCH
+git clone -b shikomatlala --single-branch https://github.com/ICEP-DEV/Research-App_UI.git
