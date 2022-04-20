@@ -24,9 +24,11 @@ import { ProjectWriteComponent } from './home/login/dashboard/projects/project/p
 import { GlobalVariables } from './globals';
 import { ProjectStatusComponent } from './home/login/dashboard/projects/project/project-status/project-status.component';
 import { ApiserviceService } from './apiservice.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { BlogOpComponent } from './home/blog-op/blog-op.component';
+import { TokenInterceptor } from './services/auth/interceptors/token.interceptors';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -54,13 +56,20 @@ import { BlogOpComponent } from './home/blog-op/blog-op.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [SidenavService, 
     GlobalVariables, 
     ApiserviceService,
     ProjectObjectService,
-    DatePipe],
+    DatePipe,{
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
