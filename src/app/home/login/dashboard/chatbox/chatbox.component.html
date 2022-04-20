@@ -1,10 +1,10 @@
 <!--NEW EDITION-->
-<main  style="background-color:rgb(255, 255, 255); height: 92%; position: fixed; top: 70px; width:82%">
-  <div>
-    <div class="card-header" style="border-radius: 0px;">
+<main style="background-color:rgb(255, 255, 255); height: 92%; position: fixed; top: 75px;">
+  <div class="container"  [style.width]="innerWidth">
+    <div class="card-header" style="border-radius: 0px;"  [style.width]="innerWidth">
       <p class="h2" style="color:rgb(129, 129, 129);">Chatbox</p>
     </div>
-    <div class="row">
+    <div class="row" [style.width]="innerWidth">
       <div class="col"  style="padding:none">
         <div class="card" style="width:100%; border:none">
           <caption style="background-color:aliceblue; text-align: center;">Open Chat..</caption>
@@ -18,7 +18,7 @@
       </div>
       </div>
       <div class="col-10"  style="padding-left:none; display: flex; flex-grow: grow;">
-        <div  #chatBoxPage style="height:700px; overflow:scroll; background-color: rgb(199, 199, 199); padding: none; display:inline;">
+        <div  #chatBoxPage style="height:650px; overflow:scroll; background-color: rgb(199, 199, 199); padding: none; display:inline;">
           <div>            
               <br>
               <div *ngFor= 'let chat of chats' style="width:90%; margin-left:auto; margin-right: auto;">

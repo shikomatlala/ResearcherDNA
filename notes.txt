@@ -3,3 +3,6 @@ GIT NOTES
 ----
 CLONE BRANCH
 git clone -b shikomatlala --single-branch https://github.com/ICEP-DEV/Research-App_UI.git
+
+
+style="background-color:rgb(255, 255, 255); height: 92%; position: fixed; top: 70px; width:82%">

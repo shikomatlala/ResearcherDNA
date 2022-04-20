@@ -26,6 +26,7 @@ import { ProjectStatusComponent } from './home/login/dashboard/projects/project/
 import { ApiserviceService } from './apiservice.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { BlogOpComponent } from './home/blog-op/blog-op.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { DatePipe } from '@angular/common';
     HomenavbarComponent,
     InnernavComponent,
     ProjectWriteComponent,
-    ProjectStatusComponent
+    ProjectStatusComponent,
+    BlogOpComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { elementAt } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -19,6 +19,9 @@ export class ChatboxComponent implements OnInit {
   displayPopup = "none";
   clickedInsertFileButtonColor = "white";
   selectedFile!: File;
+  public innerWidth: any;
+
+
 
   sidenavIcons: Array<string> = ["edit-solid.svg", "menu_black_24dp.svg"];
   sideNavProperties = {status: false,
@@ -81,6 +84,10 @@ export class ChatboxComponent implements OnInit {
   chatId: 4
 }];
 
+@HostListener('window:resize', ['$event'])
+onResize(event: any) {
+  this.innerWidth = (window.innerWidth * 0.823) + "px";
+}
 
   date = new Date();
   sendMessage() {
@@ -141,6 +148,7 @@ export class ChatboxComponent implements OnInit {
     this.inputChatBox.nativeElement.style.height = (this.inputChatBox.nativeElement.scrollHeight) + "px";
   }
   ngOnInit(): void {
+    this.innerWidth = (window.innerWidth * 0.823) + "px";
 
   }
 

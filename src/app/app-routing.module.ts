@@ -25,6 +25,7 @@ import { HomenavbarComponent } from './home/homenavbar/homenavbar.component';
 import { InnernavComponent } from './home/login/dashboard/projects/topnav/innernav/innernav.component';
 import { ProjectWriteComponent } from './home/login/dashboard/projects/project/project-write/project-write.component';
 import { ProjectStatusComponent } from './home/login/dashboard/projects/project/project-status/project-status.component';
+import { BlogOpComponent } from './home/blog-op/blog-op.component';
 
 
 const routes: Routes = [
@@ -42,7 +43,8 @@ const routes: Routes = [
   {path: 'homenavbar', component:HomenavbarComponent},
   {path: 'innernav', component:InnernavComponent},
   {path: 'project-write', component:ProjectWriteComponent},
-  {path: 'project-status', component:ProjectStatusComponent}
+  {path: 'project-status', component:ProjectStatusComponent},
+  {path: 'blog-op', component:BlogOpComponent}
 ];
 
 @NgModule({

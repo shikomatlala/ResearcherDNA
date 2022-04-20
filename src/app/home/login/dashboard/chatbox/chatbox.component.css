@@ -114,15 +114,14 @@
 } */
 
 .container {
-  position: relative;
+  position: fixed;
   float: right;
   border: 0 #dedede;
   background-color: #fff;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
-  right: 20px;
-  top: -100px;
+  width:1400px;
 }
 
 .darker {

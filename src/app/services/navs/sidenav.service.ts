@@ -14,7 +14,7 @@ export class SidenavService {
 
   constructor() { }
   //Using this classs - we want to hold what is currently happening in the navbard.
-  static sideNavStatus = false;
+  static sideNavStatus = true;
   sidenavIcons: Array<string> = ["edit-solid.svg", "menu_black_24dp.svg"];
   static navProperties = {color: "Yellow", width: "280px",  height: "100%", navOpacity: "100%", sidenavIcon : "" }
 
