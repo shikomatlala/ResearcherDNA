@@ -33,23 +33,20 @@
                     <tbody>
                       <tr *ngFor ='let us of notesData' (click)="openNote(us.id)" style="background-color:rgb(255, 255, 255); cursor:pointer">
                         <td>{{us.title}}</td>
-                        <td style="color:rgb(117, 119, 119);  font-size: 12px;">{{formatTime(us.updatedAt)}}</td>
-                        <td style="font-size:12px">{{formatDate(us.updatedAt)}}</td>
-                        <td></td>
-                        <td>
+                        <!-- <td style="color:rgb(117, 119, 119);  font-size: 12px;"></td> -->
+                        <td style="color:rgb(117, 119, 119);  font-size: 12px;">{{formatTime(us.updatedAt)}} | {{formatDate(us.updatedAt)}}</td>
+                        <!-- <td>
                           <img (click)="deleteNote(us.id, us.title)"  src="../../../../../../assets/media/logos/person_add_FILL1_wght700_GRAD200_opsz48.svg" alt="ResearcherDNA-Logo" width="20px" height="20px">
-                        </td>
+                        </td> -->
                         <th>
                           <img (click)="deleteNote(us.id, us.title)"  src="../../../../../../../assets/media/logos/delete_red_24dp.svg" alt="ResearcherDNA-Logo" width="24px" height="24px">
                         </th>
-                        <td>
-                        </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
           </div>
-          <div style="top:-10px">
+          <!-- <div style="top:-10px">
             <h6 class="card-subtitle mb-2 text-muted">Add Collaborator</h6>
             <div class="container">
               <div class="row">
@@ -83,7 +80,7 @@
                 </table>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div [ngClass]="makeNotepadFillScreen" style="background-color:rgb(255, 255, 255)">
           <div class="card border-light mb-3" style="width: 100%; border:none; background-color: rgb(255, 255, 255); ">
