@@ -29,6 +29,12 @@ import { DatePipe } from '@angular/common';
 import { BlogOpComponent } from './home/blog-op/blog-op.component';
 import { TokenInterceptor } from './services/auth/interceptors/token.interceptors';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ProjectEventsComponent } from './home/login/dashboard/projects/project/project-events/project-events.component';
+
+import { MatButtonModule } from '@angular/material/button';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCardModule} from '@angular/material/card';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +55,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     InnernavComponent,
     ProjectWriteComponent,
     ProjectStatusComponent,
-    BlogOpComponent
+    BlogOpComponent,
+    ProjectEventsComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +64,14 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     FontAwesomeModule,
     HttpClientModule,
+
+
+    //Material UI Components
+    MatDatepickerModule,
+    MatButtonModule,
+    MatCardModule,
+  
+
 
     ReactiveFormsModule,
     FormsModule

@@ -28,7 +28,7 @@
         <div  *ngIf="isNotesFound" class="col" style="margin-left: auto; margin-right: auto; position: relative; left: 8px; top:2px;">
           <div class="card " style="width: 100%; border:none;">
               <caption style="background-color:aliceblue; text-align: center;">Notes</caption>
-                <div [style.height]="notesListHeight" style="user-select: none;overflow: scroll; width: 95%; margin-left: auto; margin-right: auto; background-color: rgb(255, 255, 255);">
+                <div [style.height]="notesListHeight" style="user-select: none;overflow: scroll; width: 100%; margin-left: auto; margin-right: auto; background-color: rgb(255, 255, 255);">
                   <table class="table table-sm table-hover">
                     <tbody>
                       <tr *ngFor ='let us of notesData' (click)="openNote(us.id)" style="background-color:rgb(255, 255, 255); cursor:pointer">
@@ -36,9 +36,14 @@
                         <td style="color:rgb(117, 119, 119);  font-size: 12px;">{{formatTime(us.updatedAt)}}</td>
                         <td style="font-size:12px">{{formatDate(us.updatedAt)}}</td>
                         <td></td>
+                        <td>
+                          <img (click)="deleteNote(us.id, us.title)"  src="../../../../../../assets/media/logos/person_add_FILL1_wght700_GRAD200_opsz48.svg" alt="ResearcherDNA-Logo" width="20px" height="20px">
+                        </td>
                         <th>
                           <img (click)="deleteNote(us.id, us.title)"  src="../../../../../../../assets/media/logos/delete_red_24dp.svg" alt="ResearcherDNA-Logo" width="24px" height="24px">
                         </th>
+                        <td>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -103,10 +108,10 @@
                   <button *ngIf="isThisNoteOpen" type="button" (click)="updateNote(noteObject.id)" style=" border:none" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Update">
                     Update
                   </button>&nbsp;
-                  <button type="button" routerLink ="" class="btn btn-light btn-sm" style=" border:none"  data-toggle="tooltip" data-placement="top" title="Open in project">
+                  <!-- <button type="button" routerLink ="" class="btn btn-light btn-sm" style=" border:none"  data-toggle="tooltip" data-placement="top" title="Open in project">
                     Guideline
-                  </button>&nbsp;&nbsp;
-                  <button type="button" routerLink ="" class="btn btn-danger btn-sm" style=" border:none; background-color:red" data-toggle="tooltip" data-placement="top" title="Delete">
+                  </button>&nbsp;&nbsp; -->
+                  <button type="button" (click)="deleteNote(noteObject.id, noteObject.title)" class="btn btn-danger btn-sm" style=" border:none; background-color:red" data-toggle="tooltip" data-placement="top" title="Delete">
                     Delete
                   </button>&nbsp;&nbsp;
                   <button  type="button" class="btn btn-secondary btn-sm" (click)="clearNote()" style=" border:none; " data-toggle="tooltip" data-placement="top" title="New">

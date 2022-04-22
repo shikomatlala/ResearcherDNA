@@ -26,7 +26,7 @@ import { InnernavComponent } from './home/login/dashboard/projects/topnav/innern
 import { ProjectWriteComponent } from './home/login/dashboard/projects/project/project-write/project-write.component';
 import { ProjectStatusComponent } from './home/login/dashboard/projects/project/project-status/project-status.component';
 import { BlogOpComponent } from './home/blog-op/blog-op.component';
-
+import { ProjectEventsComponent } from './home/login/dashboard/projects/project/project-events/project-events.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent},
@@ -44,7 +44,8 @@ const routes: Routes = [
   {path: 'innernav', component:InnernavComponent},
   {path: 'project-write', component:ProjectWriteComponent},
   {path: 'project-status', component:ProjectStatusComponent},
-  {path: 'blog-op', component:BlogOpComponent}
+  {path: 'blog-op', component:BlogOpComponent},
+  {path: 'project-events', component:ProjectEventsComponent}
 ];
 
 @NgModule({
