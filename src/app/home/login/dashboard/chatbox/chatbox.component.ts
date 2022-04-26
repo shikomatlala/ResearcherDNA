@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { elementAt } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-chatbox',
@@ -11,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class ChatboxComponent implements OnInit {
 
-  constructor(public datepipe: DatePipe, public http: HttpClient) { }
+  constructor(public authService: AuthService, public datepipe: DatePipe, public http: HttpClient, public router: Router) { }
   @ViewChild('inputChatBox') inputChatBox: any;
   @ViewChild('chatBoxPage') chatBoxPage: any;
   @ViewChild('formPopupInsertAttachment') formPopupInsertAttachment :any;
@@ -149,6 +151,10 @@ onResize(event: any) {
   }
   ngOnInit(): void {
     this.innerWidth = (window.innerWidth * 0.823) + "px";
+
+    if(this.authService.isAuthenticated) this.router.navigate(['/dashboard'], {
+      queryParams: { message: 'Please log out first ' }
+    });
 
   }
 

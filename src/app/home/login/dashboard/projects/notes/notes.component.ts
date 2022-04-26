@@ -4,7 +4,8 @@ import { DatePipe,  } from '@angular/common';
 import {ApiserviceService} from './../../../../../apiservice.service';
 import { ProjectObjectService } from '../project-object.service';
 import { ControlContainer } from '@angular/forms';
-
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-notes',
@@ -13,7 +14,7 @@ import { ControlContainer } from '@angular/forms';
 })
 export class NotesComponent implements OnInit {
 
-  constructor(public sidenavService: SidenavService,public globalProjectObject: ProjectObjectService, private service: ApiserviceService, public datepipe: DatePipe) { }
+  constructor(public sidenavService: SidenavService,public globalProjectObject: ProjectObjectService, private service: ApiserviceService, public datepipe: DatePipe, public authService: AuthService, public router: Router ) { }
   //Variables to use to update the note.
   @ViewChild('inputNoteTitle') inputNoteTitle: any;
   @ViewChild('inputNoteText') inputNoteText:any;
@@ -55,6 +56,10 @@ export class NotesComponent implements OnInit {
       console.log(this.noteObject);
       console.log("We are here");
     }
+
+    if(this.authService.isAuthenticated) this.router.navigate(['/dashboard'], {
+      queryParams: { message: 'Please log out first ' }
+    });
   }
   findNotesByTitle()
   {

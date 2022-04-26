@@ -6,6 +6,7 @@ import { ApiserviceService } from 'src/app/apiservice.service';
 import { GlobalVariables} from './../../../globals';
 import { DatePipe } from '@angular/common';
 import { ProjectObjectService } from './projects/project-object.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -14,7 +15,7 @@ import { ProjectObjectService } from './projects/project-object.service';
 
 export class DashboardComponent implements OnInit {
 
-  constructor(public projectObject : ProjectObjectService, public datepipe: DatePipe, public router:Router, public globalVariables: GlobalVariables, private service: ApiserviceService ) { }
+  constructor( public projectObject : ProjectObjectService, public datepipe: DatePipe, public router:Router, public globalVariables: GlobalVariables, private service: ApiserviceService, public authService: AuthService ) { }
   
 
   isDisplaySuccessMessage = false;
@@ -64,6 +65,11 @@ export class DashboardComponent implements OnInit {
     console.log(GlobalVariables.isToBeShown + ' is ');
     this.myProjects();
     this.allDisciplines();
+
+
+    if(this.authService.isAuthenticated) this.router.navigate(['/dashboard'], {
+      queryParams: { message: 'Please log out first ' }
+    });
   }
   disableProjectSaveButtons()
   {

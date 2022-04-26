@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApiserviceService } from 'src/app/apiservice.service';
 
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,6 +32,11 @@ export class ProjectObjectService {
     updatedAt: "2022-02-24T16:18:00.000Z",
     projectStatusId: 0,
     projectTypeId: 0
+  }
+
+  ngOnInit(): void
+  {
+
   }
   //Function to update the project Object
   updateProjectObject(projectId:any)

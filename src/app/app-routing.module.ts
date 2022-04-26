@@ -28,23 +28,29 @@ import { ProjectStatusComponent } from './home/login/dashboard/projects/project/
 import { BlogOpComponent } from './home/blog-op/blog-op.component';
 import { ProjectEventsComponent } from './home/login/dashboard/projects/project/project-events/project-events.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { SessionGuardService } from './services/auth/session-guard.service';
+
 
 const routes: Routes = [
+  {
+    path: '', redirectTo: 'home', pathMatch: 'full'
+  },
   {path: 'home', component:HomeComponent},
   {path: 'login', component:LoginComponent},
-  {path: 'dashboard', component:DashboardComponent},
-  {path: 'profile', component:ProfileComponent},
-  {path: 'projects', component:ProjectsComponent},
-  {path: 'guidelines', component:GuidelinesComponent},
-  {path: 'notes', component:NotesComponent},
-  {path: 'project', component:ProjectComponent},
+  {path: 'signup', component:SignupComponent},
+  {path: 'dashboard', component:DashboardComponent, canActivate:[SessionGuardService]},
+  {path: 'profile', component:ProfileComponent, canActivate:[SessionGuardService]},
+  {path: 'projects', component:ProjectsComponent, canActivate:[SessionGuardService]},
+  {path: 'guidelines', component:GuidelinesComponent, canActivate:[SessionGuardService]},
+  {path: 'notes', component:NotesComponent, canActivate:[SessionGuardService]},
+  {path: 'project', component:ProjectComponent, canActivate:[SessionGuardService]},
   {path: 'blog', component:BlogComponent},
-  {path: 'sidenav', component:SidenavComponent},
-  {path: 'chatbox', component:ChatboxComponent},
-  {path: 'homenavbar', component:HomenavbarComponent},
-  {path: 'innernav', component:InnernavComponent},
-  {path: 'project-write', component:ProjectWriteComponent},
-  {path: 'project-status', component:ProjectStatusComponent},
+  {path: 'sidenav', component:SidenavComponent, canActivate:[SessionGuardService]},
+  {path: 'chatbox', component:ChatboxComponent, canActivate:[SessionGuardService]},
+  {path: 'homenavbar', component:HomenavbarComponent, canActivate:[SessionGuardService]},
+  {path: 'innernav', component:InnernavComponent, canActivate:[SessionGuardService]},
+  {path: 'project-write', component:ProjectWriteComponent, canActivate:[SessionGuardService]},
+  {path: 'project-status', component:ProjectStatusComponent, canActivate:[SessionGuardService]},
   {path: 'blog-op', component:BlogOpComponent},
   {path: 'project-events', component:ProjectEventsComponent},
   {path: 'signup', component:SignupComponent}
