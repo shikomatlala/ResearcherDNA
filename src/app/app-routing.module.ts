@@ -27,6 +27,7 @@ import { ProjectWriteComponent } from './home/login/dashboard/projects/project/p
 import { ProjectStatusComponent } from './home/login/dashboard/projects/project/project-status/project-status.component';
 import { BlogOpComponent } from './home/blog-op/blog-op.component';
 import { ProjectEventsComponent } from './home/login/dashboard/projects/project/project-events/project-events.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent},
@@ -45,7 +46,8 @@ const routes: Routes = [
   {path: 'project-write', component:ProjectWriteComponent},
   {path: 'project-status', component:ProjectStatusComponent},
   {path: 'blog-op', component:BlogOpComponent},
-  {path: 'project-events', component:ProjectEventsComponent}
+  {path: 'project-events', component:ProjectEventsComponent},
+  {path: 'signup', component:SignupComponent}
 ];
 
 @NgModule({

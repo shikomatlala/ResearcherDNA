@@ -13,9 +13,10 @@ export class ProjectObjectService {
    title: "",
    wordCount: 0,
    createdAt: "",
+   projectId: 1,
    userId: 1};
   static projectObject = {
-    id: 0,
+    id: 1,
     name: "Not Found",
     description: "NB: Project Not found consider the following:\n - Login before you open project\n Logout and login",
     text: "No Text Found",

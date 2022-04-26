@@ -34,6 +34,7 @@ import { ProjectEventsComponent } from './home/login/dashboard/projects/project/
 import { MatButtonModule } from '@angular/material/button';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
+import { SignupComponent } from './components/signup/signup.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import {MatCardModule} from '@angular/material/card';
     ProjectWriteComponent,
     ProjectStatusComponent,
     BlogOpComponent,
-    ProjectEventsComponent
+    ProjectEventsComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

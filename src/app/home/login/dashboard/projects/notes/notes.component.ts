@@ -204,7 +204,8 @@ export class NotesComponent implements OnInit {
       let newNoteObject = {
         text: this.inputNoteText.nativeElement.value,
         title: this.inputNoteTitle.nativeElement.value,
-        userId: ProjectObjectService.projectObject.userId
+        userId: ProjectObjectService.projectObject.userId,
+        projectId: ProjectObjectService.noteObject.projectId
       };
       console.log(newNoteObject);
       // console.log(this.noteObject);
